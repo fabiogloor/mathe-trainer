@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zahlenraum Challenge - 5. Klasse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <div id="app" class="min-h-screen flex flex-col items-center p-4">
+        <div class="w-full max-w-2xl mb-6 flex justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="p-2 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </a>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Zahlen bis 1'000'000</h1>
+                    <p class="text-[10px] text-purple-600 uppercase tracking-widest font-bold">Stellenwerte & Runden</p>
+                </div>
+            </div>
+            <div id="progress-container" class="text-right">
+                <div id="step-label" class="text-xs font-bold text-purple-600 mb-1">Aufgabe 1/10</div>
+                <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-purple-500 transition-all duration-500" style="width: 10%"></div>
+                </div>
+            </div>
+        </div>
+        <main id="main-content" class="w-full max-w-2xl"></main>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        let seed = Date.now();
+        let gameState = 'playing';
+
+        function getSeededRandom(min, max, offset = 0) {
+            const x = Math.sin(seed + currentStep + offset) * 10000;
+            return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
+        }
+
+        const questions = [
+            () => {
+                const n = getSeededRandom(10, 99) * 1000 + 450;
+                return { text: `Wie viele Tausender stecken in der Zahl ${n.toLocaleString('de-CH')}?`, options: [Math.floor(n/1000).toString(), "4", "5"], correct: Math.floor(n/1000).toString(), hint: "Schau dir die Stelle vor dem Tausender-Punkt an." };
+            },
+            () => {
+                const n = getSeededRandom(400, 600) * 1000 + 780;
+                const rounded = Math.round(n / 1000) * 1000;
+                return { text: `Runde die Zahl ${n.toLocaleString('de-CH')} auf den nächsten Tausender.`, options: [rounded.toLocaleString('de-CH'), (rounded-1000).toLocaleString('de-CH'), (rounded+1000).toLocaleString('de-CH')], correct: rounded.toLocaleString('de-CH'), hint: "Ab 500 wird aufgerundet." };
+            },
+            () => {
+                const n = 1000000;
+                return { text: "Wie viele Hunderter-Tausender (HT) ergeben zusammen 1 Million?", options: ["10", "100", "5"], correct: "10", hint: "10 mal 100'000 = 1'000'000." };
+            },
+            () => {
+                const z = getSeededRandom(1, 9);
+                const n = z * 10000 + 5000 + 200 + 30 + 1;
+                return { text: `Welche Zahl ist das: ${z} ZT + 5 T + 2 H + 3 Z + 1 E?`, options: [n.toLocaleString('de-CH'), (n-1000).toLocaleString('de-CH'), (n+10000).toLocaleString('de-CH')], correct: n.toLocaleString('de-CH'), hint: "ZT = Zehntausender, T = Tausender, H = Hunderter." };
+            },
+            () => {
+                return { text: "Was ist der Nachfolger von 999'999?", options: ["1'000'000", "1'000'001", "999'100"], correct: "1'000'000", hint: "Rechne plus 1." };
+            },
+            () => {
+                const base = getSeededRandom(200, 500) * 1000;
+                return { text: `Zähle in 10'000er Schritten: ${base.toLocaleString('de-CH')}, ${(base+10000).toLocaleString('de-CH')}, ...`, options: [(base+20000).toLocaleString('de-CH'), (base+11000).toLocaleString('de-CH'), (base+30000).toLocaleString('de-CH')], correct: (base+20000).toLocaleString('de-CH'), hint: "Addiere 10'000 zur letzten Zahl." };
+            },
+            () => {
+                const n = 750000;
+                return { text: `In welcher Zahl ist die Ziffer 7 an der HT-Stelle (Hunderttausender)?`, options: ["750'000", "75'000", "570'000"], correct: "750'000", hint: "HT ist die sechste Stelle von rechts." };
+            },
+            () => {
+                return { text: "Runde 452'890 auf den nächsten Zehntausender (ZT).", options: ["450'000", "460'000", "453'000"], correct: "450'000", hint: "Die Tausender-Stelle ist eine 2, also abrunden." };
+            },
+            () => {
+                return { text: "Welche Zahl ist kleiner?", options: ["405'000", "450'000", "504'000"], correct: "405'000", hint: "Vergleiche die Ziffern von links nach rechts." };
+            },
+            () => {
+                return { text: "Finaler Check: Wie schreibt man 'Fünfhunderttausend-fünf' in Ziffern?", options: ["500'005", "505'000", "500'050"], correct: "500'005", hint: "HT=5, E=5, alles andere sind Nullen." };
+            }
+        ];
+
+        function render() {
+            const main = document.getElementById('main-content');
+            if (gameState === 'fail') {
+                main.innerHTML = `<div class="bg-white p-8 rounded-2xl shadow-xl text-center border-t-8 border-red-500">
+                    <h2 class="text-2xl font-bold mb-4">Neustart!</h2>
+                    <p class="mb-8">Die Millionen-Challenge braucht volle Konzentration.</p>
+                    <button onclick="location.reload()" class="w-full bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg">Nochmal versuchen</button>
+                </div>`;
+                return;
+            }
+            if (gameState === 'success') {
+                main.innerHTML = `<div class="bg-white p-8 rounded-2xl shadow-xl text-center border-t-8 border-green-500">
+                    <h2 class="text-3xl font-black mb-4 text-green-700">MILLIONÄR!</h2>
+                    <p class="mb-8">Du beherrschst den grossen Zahlenraum perfekt.</p>
+                    <a href="index.html" class="block w-full bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg mb-4">Zur Übersicht</a>
+                </div>`;
+                return;
+            }
+            const q = questions[currentStep]();
+            document.getElementById('step-label').innerText = `Aufgabe ${currentStep+1}/10`;
+            document.getElementById('progress-bar').style.width = `${(currentStep+1)*10}%`;
+            main.innerHTML = `<div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-200">
+                <p class="text-xl font-bold mb-8 text-center">${q.text}</p>
+                <div class="grid gap-3">${q.options.map(o => `<button onclick="check('${o}', '${q.correct}')" class="w-full p-4 rounded-xl border-2 border-slate-100 hover:border-purple-400 font-semibold transition-all">${o}</button>`).join('')}</div>
+            </div><div class="mt-4 p-4 bg-purple-50 border border-purple-100 rounded-xl text-xs text-purple-700"><b>Tipp:</b> ${q.hint}</div>`;
+        }
+
+        function check(sel, cor) {
+            if (sel === cor) {
+                if (currentStep < 9) { currentStep++; render(); } else { gameState = 'success'; render(); }
+            } else { gameState = 'fail'; render(); }
+        }
+        render();
+    </script>
+</body>
+</html>

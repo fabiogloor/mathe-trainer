@@ -3,353 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathe Mastery Challenge - 5. Klasse</title>
+    <title>Mathe-Training 5. Klasse</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .bar-transition { transition: height 0.5s ease-out; }
-        .shake { animation: shake 0.5s; }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-900">
+    <div class="min-h-screen flex flex-col items-center p-6">
+        <header class="w-full max-w-4xl mb-12 text-center">
+            <h1 class="text-4xl font-black text-blue-600 mb-2">Mathe-Mastery</h1>
+            <p class="text-slate-500 font-medium">Wähle ein Thema und knacke die 10/10 Challenge!</p>
+        </header>
 
-    <div id="app" class="min-h-screen flex flex-col items-center p-4">
-        <!-- Header -->
-        <div class="w-full max-w-2xl mb-6 flex justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-            <div class="flex items-center gap-3">
-                <div class="bg-blue-600 p-2 rounded-lg text-white" id="header-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Karte: Durchschnitte -->
+            <a href="durchschnitt.html" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-400 hover:shadow-xl transition-all">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-blue-100 text-blue-600 p-3 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                    </div>
+                    <h2 class="text-xl font-bold">Durchschnitte</h2>
                 </div>
-                <div>
-                    <h1 class="font-bold text-lg leading-tight">Mathe Mastery Challenge</h1>
-                    <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">5. Klasse • Durchschnitte & Diagramme</p>
-                </div>
-            </div>
-            <div id="progress-container" class="hidden text-right">
-                <div class="text-xs font-bold text-blue-600 mb-1" id="step-label">Aufgabe 1 von 10</div>
-                <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500" style="width: 10%"></div>
-                </div>
-            </div>
-        </div>
+                <p class="text-slate-500 text-sm">Tabellen lesen, Diagramme verstehen und den Durchschnitt berechnen.</p>
+            </a>
 
-        <main id="main-content" class="w-full max-w-2xl">
-            <!-- Content will be injected here -->
+            <!-- Karte: Variablen -->
+            <a href="variablen.html" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-orange-400 hover:shadow-xl transition-all">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-orange-100 text-orange-600 p-3 rounded-xl group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5-5 5 5"/><path d="m7 9 5 5 5-5"/></svg>
+                    </div>
+                    <h2 class="text-xl font-bold">Variablen & Platzhalter</h2>
+                </div>
+                <p class="text-slate-500 text-sm">Finde den Wert von x. Gleichungen lösen und Terme berechnen.</p>
+            </a>
+
+            <!-- Karte: Grosse Zahlen -->
+            <a href="grosszahlen.html" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-purple-400 hover:shadow-xl transition-all">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-purple-100 text-purple-600 p-3 rounded-xl group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h2 class="text-xl font-bold">Zahlen bis 1'000'000</h2>
+                </div>
+                <p class="text-slate-500 text-sm">Stellenwerte, Runden und Rechnen im grossen Zahlenraum.</p>
+            </a>
+
+            <!-- Karte: Grössen -->
+            <a href="groessen.html" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-green-400 hover:shadow-xl transition-all">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-green-100 text-green-600 p-3 rounded-xl group-hover:bg-green-600 group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10H3"/><path d="M21 6H3"/><path d="M21 14H3"/><path d="M21 18H3"/></svg>
+                    </div>
+                    <h2 class="text-xl font-bold">Grössen & Einheiten</h2>
+                </div>
+                <p class="text-slate-500 text-sm">Umwandeln von Längen, Gewichten und Zeitangaben.</p>
+            </a>
         </main>
 
-        <footer class="mt-auto pt-8 pb-4 text-slate-400 text-[10px] text-center">
-            Basierend auf Schweizer Zahlenbuch 5 • Klett und Balmer<br>
-            Mastery Mode: 10/10 richtig lösen für die Belohnung.
+        <footer class="mt-20 text-slate-400 text-xs flex flex-col items-center gap-2">
+            <div class="flex gap-4">
+                <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg> Sicher & werbefrei</span>
+                <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg> Schweizer Lehrplan</span>
+            </div>
+            <p>© 2026 Mathe-Mastery Aargau</p>
         </footer>
     </div>
-
-    <script>
-        // State Management
-        let currentStep = 0;
-        let seed = Date.now();
-        let gameState = 'start'; // start, playing, fail, success
-        
-        const formatText = (text) => text.replace(/ß/g, 'ss');
-
-        function getSeededRandom(min, max, offset = 0) {
-            const x = Math.sin(seed + currentStep + offset) * 10000;
-            const rand = x - Math.floor(x);
-            return Math.floor(rand * (max - min + 1)) + min;
-        }
-
-        function generateQuestions() {
-            return [
-                // Q1: Durchschnitt visualisiert (Stäbe)
-                () => {
-                    const a = getSeededRandom(4, 8);
-                    const b = getSeededRandom(10, 14);
-                    const c = 30 - a - b;
-                    return {
-                        title: "Durchschnitt berechnen",
-                        text: "Drei Stäbe haben unterschiedliche Längen. Wie gross ist die durchschnittliche Länge?",
-                        visual: `
-                            <div class="flex items-end justify-center gap-6 h-40 border-b-2 border-slate-200 pb-2 relative">
-                                <div class="bg-blue-400 w-10 rounded-t shadow-inner relative" style="height: ${a * 10}px">
-                                    <span class="absolute -top-6 left-0 right-0 text-center text-xs font-bold">${a}cm</span>
-                                </div>
-                                <div class="bg-blue-500 w-10 rounded-t shadow-inner relative" style="height: ${b * 10}px">
-                                    <span class="absolute -top-6 left-0 right-0 text-center text-xs font-bold">${b}cm</span>
-                                </div>
-                                <div class="bg-blue-600 w-10 rounded-t shadow-inner relative" style="height: ${c * 10}px">
-                                    <span class="absolute -top-6 left-0 right-0 text-center text-xs font-bold">${c}cm</span>
-                                </div>
-                            </div>`,
-                        options: ["10 cm", "12 cm", "8 cm"],
-                        correct: "10 cm",
-                        hint: "Addiere alle Längen (Total: 30) und teile durch die Anzahl der Stäbe (3)."
-                    };
-                },
-                // Q2: Median sortieren
-                () => {
-                    let nums = [getSeededRandom(2,10), getSeededRandom(12,20), getSeededRandom(22,30), getSeededRandom(32,40), getSeededRandom(42,55)];
-                    const median = nums[2];
-                    const shuffled = [...nums].sort(() => Math.random() - 0.5);
-                    return {
-                        title: "Der mittlere Wert (Median)",
-                        text: "Ordne diese Zahlen im Kopf der Grösse nach. Welches ist der mittlere Wert?",
-                        data: shuffled.join(" | "),
-                        options: [median.toString(), nums[1].toString(), nums[3].toString()],
-                        correct: median.toString(),
-                        hint: "Schreibe die Zahlen von klein nach gross auf. Die Zahl in der Mitte ist die Lösung."
-                    };
-                },
-                // Q3: Fehlende Zahl
-                () => {
-                    const avg = getSeededRandom(12, 25) * 10;
-                    const n1 = avg - 20;
-                    const n2 = avg + 10;
-                    const n3 = (avg * 3) - n1 - n2;
-                    return {
-                        title: "Die fehlende Zahl",
-                        text: `Der Durchschnitt von drei Zahlen ist ${avg}. Die ersten zwei Zahlen sind ${n1} und ${n2}. Wie gross ist die dritte Zahl?`,
-                        options: [n3.toString(), (n3-10).toString(), (n3+20).toString()],
-                        correct: n3.toString(),
-                        hint: `Die Summe muss ${avg * 3} ergeben.`
-                    };
-                },
-                // Q4: Diagramm-Skalierung
-                () => {
-                    const speed = getSeededRandom(5, 12) * 10;
-                    const height = speed / 10;
-                    return {
-                        title: "Diagramm lesen",
-                        text: `Im Diagramm entspricht 1 cm Höhe genau 10 km/h. Ein Tier rennt ${speed} km/h. Wie hoch muss seine Säule gezeichnet werden?`,
-                        visual: `<div class="p-4 bg-orange-50 border border-orange-100 rounded-lg flex items-center gap-4">
-                                    <div class="w-4 h-12 bg-orange-400 rounded-t"></div>
-                                    <div class="text-xs"><b>Massstab:</b><br>1 cm = 10 km/h</div>
-                                 </div>`,
-                        options: [`${height} cm`, `${height*10} cm`, `1 cm`],
-                        correct: `${height} cm`,
-                        hint: `Teile ${speed} durch 10.`
-                    };
-                },
-                // Q5: Schrittzähler
-                () => {
-                    const avg = getSeededRandom(8, 14) * 1000;
-                    const total = avg * 7;
-                    return {
-                        title: "Schrittzähler-Woche",
-                        text: `In einer Woche macht jemand durchschnittlich ${avg.toLocaleString()} Schritte pro Tag. Wie viele Schritte sind das insgesamt in 7 Tagen?`,
-                        options: [total.toLocaleString(), (total-5000).toLocaleString(), (avg*5).toLocaleString()],
-                        correct: total.toLocaleString(),
-                        hint: "Rechne den Tagesdurchschnitt mal 7 Tage."
-                    };
-                },
-                // Q6: Minimum in Tabelle
-                () => {
-                    const k = [
-                        {n: "Aargau", e: 653500},
-                        {n: "Glarus", e: 38500},
-                        {n: "Uri", e: 36000}
-                    ];
-                    return {
-                        title: "Minimum finden",
-                        text: "Welcher Kanton hat die wenigsten Einwohner (das Minimum)?",
-                        visual: `<table class="w-full text-xs border border-slate-200">
-                                    <tr class="bg-slate-100 font-bold"><td>Kanton</td><td>Einwohner</td></tr>
-                                    <tr><td>${k[0].n}</td><td>${k[0].e.toLocaleString()}</td></tr>
-                                    <tr><td>${k[1].n}</td><td>${k[1].e.toLocaleString()}</td></tr>
-                                    <tr><td>${k[2].n}</td><td>${k[2].e.toLocaleString()}</td></tr>
-                                 </table>`,
-                        options: ["Uri", "Glarus", "Aargau"],
-                        correct: "Uri",
-                        hint: "Suche die kleinste Zahl in der Liste."
-                    };
-                },
-                // Q7: Vergleich
-                () => {
-                    return {
-                        title: "Verständnisfrage",
-                        text: "Der Durchschnitt ist 15 cm, der mittlere Wert (Median) ist 12 cm. Welche Aussage ist korrekt?",
-                        options: [
-                            "Der Durchschnitt ist höher als der mittlere Wert.",
-                            "Der Durchschnitt ist tiefer als der mittlere Wert.",
-                            "Beide sind exakt gleich."
-                        ],
-                        correct: "Der Durchschnitt ist höher als der mittlere Wert.",
-                        hint: "Ist 15 mehr oder weniger als 12?"
-                    };
-                },
-                // Q8: Liniendiagramm
-                () => {
-                    const start = (getSeededRandom(50, 60)/10).toFixed(2);
-                    const end = (getSeededRandom(40, 48)/10).toFixed(2);
-                    const diff = (parseFloat(start) - parseFloat(end)).toFixed(2);
-                    return {
-                        title: "Preis-Differenz",
-                        text: `Silber kostet im März ${start} Fr. und im April ${end} Fr. Um wie viel ist der Preis gesunken?`,
-                        options: [`${diff} Fr.`, "1.00 Fr.", "0.20 Fr."],
-                        correct: `${diff} Fr.`,
-                        hint: "Subtrahiere den kleineren vom grösseren Preis."
-                    };
-                },
-                // Q9: Robbys Lesewoche
-                () => {
-                    const p1 = 10, p2 = 30, p3 = 20;
-                    return {
-                        title: "Lesedurchschnitt",
-                        text: "Robby liest: Montag 10 S., Dienstag 30 S., Mittwoch 20 S. Wie viele Seiten sind das im Durchschnitt?",
-                        options: ["20 Seiten", "15 Seiten", "60 Seiten"],
-                        correct: "20 Seiten",
-                        hint: "Summe (60) geteilt durch 3 Tage."
-                    };
-                },
-                // Q10: Die grosse Summe
-                () => {
-                    const avg = getSeededRandom(10, 50) * 10;
-                    const count = 5;
-                    return {
-                        title: "Finale: Die Gesamtsumme",
-                        text: `Fünf Zahlen haben einen Durchschnitt von ${avg}. Wie hoch muss ihre Gesamtsumme sein?`,
-                        options: [(avg * count).toString(), (avg * 10).toString(), (avg + 5).toString()],
-                        correct: (avg * count).toString(),
-                        hint: "Multipliziere den Durchschnitt mit der Anzahl (5)."
-                    };
-                }
-            ];
-        }
-
-        function render() {
-            const main = document.getElementById('main-content');
-            const progress = document.getElementById('progress-container');
-            const bar = document.getElementById('progress-bar');
-            const stepLabel = document.getElementById('step-label');
-
-            if (gameState === 'start') {
-                progress.classList.add('hidden');
-                main.innerHTML = `
-                    <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200 text-center animate-in fade-in zoom-in duration-300">
-                        <div class="mb-6 inline-block p-4 bg-blue-50 rounded-full text-blue-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01"/><path d="M18 12h.01"/></svg>
-                        </div>
-                        <h2 class="text-2xl font-bold mb-4">Startbereit?</h2>
-                        <div class="text-slate-600 mb-8 space-y-3 text-left max-w-sm mx-auto">
-                            <p class="flex items-start gap-3 text-sm">✅ 10 Aufgaben fehlerfrei lösen.</p>
-                            <p class="flex items-start gap-3 text-sm">❌ Bei einem Fehler: Neustart!</p>
-                            <p class="flex items-start gap-3 text-sm">🎮 Belohnung: YouTube / Gamen!</p>
-                        </div>
-                        <button onclick="startGame()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">Challenge starten</button>
-                    </div>`;
-            } else if (gameState === 'playing') {
-                progress.classList.remove('hidden');
-                const q = generateQuestions()[currentStep]();
-                stepLabel.innerText = `Aufgabe ${currentStep + 1} von 10`;
-                bar.style.width = `${(currentStep + 1) * 10}%`;
-
-                main.innerHTML = `
-                    <div class="space-y-4 animate-in slide-in-from-right-4 duration-300">
-                        <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-200">
-                            <h3 class="text-blue-600 font-bold text-xs uppercase mb-2">${formatText(q.title)}</h3>
-                            <p class="text-lg font-bold mb-6 leading-tight">${formatText(q.text)}</p>
-                            
-                            ${q.data ? `<div class="bg-slate-50 p-4 rounded-xl text-center font-mono text-xl mb-6 text-blue-900 border border-slate-100">${q.data}</div>` : ''}
-                            ${q.visual ? `<div class="mb-6">${q.visual}</div>` : ''}
-
-                            <div class="grid gap-3" id="options-grid">
-                                ${q.options.map((opt, i) => `
-                                    <button onclick="checkAnswer('${opt}', '${q.correct}', ${i})" class="w-full p-4 text-left rounded-xl border-2 border-slate-100 bg-white hover:border-blue-400 font-semibold transition-all">
-                                        ${opt}
-                                    </button>
-                                `).join('')}
-                            </div>
-                        </div>
-
-                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                            <details class="group">
-                                <summary class="list-none flex items-center gap-2 text-blue-700 font-bold text-sm cursor-pointer select-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A4.5 4.5 0 0 0 13.5 3.5 4.5 4.5 0 0 0 9 8c0 1 .3 2.2 1 3"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                                    Brauchst du einen Tipp?
-                                </summary>
-                                <p class="mt-2 text-sm text-blue-600 leading-snug">${formatText(q.hint)}</p>
-                            </details>
-                        </div>
-                    </div>`;
-            } else if (gameState === 'fail') {
-                progress.classList.add('hidden');
-                main.innerHTML = `
-                    <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-t-red-500 text-center animate-in slide-in-from-bottom-4 duration-300">
-                        <div class="mb-4 text-red-500">
-                            <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        </div>
-                        <h2 class="text-2xl font-bold mb-2">Fast geschafft!</h2>
-                        <p class="text-slate-600 mb-8 text-sm">Ein kleiner Fehler... aber Übung macht den Meister! Die Zahlen wurden neu gewürfelt.</p>
-                        <button onclick="startGame()" class="w-full bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg">Neustart (neue Zahlen)</button>
-                    </div>`;
-            } else if (gameState === 'success') {
-                progress.classList.add('hidden');
-                main.innerHTML = `
-                    <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-t-green-500 text-center animate-in zoom-in duration-500">
-                        <div class="mb-4 text-green-500 animate-bounce">
-                            <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-                        </div>
-                        <h2 class="text-3xl font-black mb-2 text-green-700 uppercase">Master!</h2>
-                        <p class="text-slate-700 mb-8 font-medium">10/10 richtig! Deine Konzentration war spitze.</p>
-                        
-                        <div class="bg-yellow-50 p-6 rounded-2xl border-2 border-yellow-200 mb-8 relative">
-                            <div class="absolute -top-3 -right-3 rotate-12 bg-yellow-400 text-white text-[10px] font-bold px-2 py-1 rounded shadow">FREIGEGEBEN</div>
-                            <h3 class="font-bold text-yellow-800 mb-4">DEINE BELOHNUNG:</h3>
-                            <div class="flex justify-center gap-8">
-                                <div class="flex flex-col items-center gap-1">
-                                    <div class="p-3 bg-red-600 text-white rounded-full shadow-lg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z"/><path d="m10 15 5-3-5-3z"/></svg></div>
-                                    <span class="text-[10px] font-bold">YouTube</span>
-                                </div>
-                                <div class="flex flex-col items-center gap-1">
-                                    <div class="p-3 bg-blue-600 text-white rounded-full shadow-lg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01"/><path d="M18 12h.01"/></svg></div>
-                                    <span class="text-[10px] font-bold">Gaming</span>
-                                </div>
-                            </div>
-                            <p class="mt-4 text-xs text-yellow-700 font-bold italic">Zeig das deinem Vater!</p>
-                        </div>
-                    </div>`;
-            }
-        }
-
-        function startGame() {
-            gameState = 'playing';
-            currentStep = 0;
-            seed = Date.now();
-            render();
-        }
-
-        function checkAnswer(selected, correct, index) {
-            const buttons = document.querySelectorAll('#options-grid button');
-            buttons.forEach(b => b.disabled = true);
-            
-            if (selected === correct) {
-                buttons[index].classList.add('border-green-500', 'bg-green-50');
-                buttons[index].innerHTML += ` <span class="float-right">✅</span>`;
-                setTimeout(() => {
-                    if (currentStep < 9) {
-                        currentStep++;
-                        render();
-                    } else {
-                        gameState = 'success';
-                        render();
-                    }
-                }, 1000);
-            } else {
-                buttons[index].classList.add('border-red-500', 'bg-red-50', 'shake');
-                buttons[index].innerHTML += ` <span class="float-right">❌</span>`;
-                setTimeout(() => {
-                    gameState = 'fail';
-                    render();
-                }, 1000);
-            }
-        }
-
-        // Init
-        render();
-    </script>
 </body>
 </html>
