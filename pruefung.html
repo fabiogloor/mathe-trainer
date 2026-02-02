@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastery Prüfung - 5. Klasse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .keypad-btn { @apply bg-slate-100 hover:bg-slate-200 p-4 rounded-xl text-xl font-bold transition-all active:scale-95 border-b-4 border-slate-300 active:border-b-0; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white overflow-hidden">
+    <div id="app" class="min-h-screen flex flex-col items-center p-4">
+        <!-- Header -->
+        <div class="w-full max-w-md mt-4 mb-8 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+                <h1 class="text-xl font-black tracking-tighter text-red-500 uppercase">Prüfung</h1>
+            </div>
+            <div class="text-right">
+                <div class="text-[10px] font-bold text-slate-500 uppercase">Fortschritt</div>
+                <div class="flex gap-1" id="dots"></div>
+            </div>
+        </div>
+
+        <main id="main-content" class="w-full max-w-md flex-1 flex flex-col">
+            <!-- Dynamischer Content -->
+        </main>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 20; // 20 Aufgaben für 20-30 Minuten
+        let seed = Date.now();
+        let currentAnswer = "";
+        let correctValue = "";
+
+        function getSeededRandom(min, max, offset = 0) {
+            const x = Math.sin(seed + currentStep + offset) * 10000;
+            return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
+        }
+
+        // Generator für gemischte Aufgaben
+        function generateTask() {
+            const type = getSeededRandom(1, 5); // 5 verschiedene Aufgabentypen
+            
+            if (type === 1) { // Durchschnitt
+                const a = getSeededRandom(5, 15);
+                const b = getSeededRandom(5, 15);
+                const c = 30 - a - b;
+                return { q: `Berechne den Durchschnitt von: ${a}, ${b} und ${c}`, a: "10" };
+            }
+            if (type === 2) { // Variable
+                const x = getSeededRandom(11, 40);
+                const base = getSeededRandom(10, 50);
+                return { q: `Finde x: ${base} + x = ${base + x}`, a: x.toString() };
+            }
+            if (type === 3) { // Grössen
+                const km = getSeededRandom(2, 8);
+                return { q: `Wie viele Meter sind ${km} km?`, a: (km * 1000).toString() };
+            }
+            if (type === 4) { // Grosse Zahlen
+                const start = getSeededRandom(990, 998) * 1000 + 999;
+                return { q: `Was ist der Nachfolger von ${start.toLocaleString('de-CH')}?`, a: (start + 1).toString() };
+            }
+            if (type === 5) { // Geometrie
+                const s = getSeededRandom(4, 9);
+                return { q: `Fläche eines Quadrats mit Seite ${s} cm? (Nur Zahl)`, a: (s * s).toString() };
+            }
+        }
+
+        let task = generateTask();
+
+        function render() {
+            const main = document.getElementById('main-content');
+            const dots = document.getElementById('dots');
+            
+            // Progress Dots
+            dots.innerHTML = Array.from({length: totalSteps}).map((_, i) => 
+                `<div class="w-2 h-2 rounded-full ${i < currentStep ? 'bg-green-500' : (i === currentStep ? 'bg-red-500 animate-pulse' : 'bg-slate-700')}"></div>`
+            ).join('');
+
+            if (currentStep >= totalSteps) {
+                main.innerHTML = `<div class="bg-white text-slate-900 p-8 rounded-3xl shadow-2xl text-center">
+                    <div class="text-6xl mb-4">🏆</div>
+                    <h2 class="text-3xl font-black mb-4">BESTANDEN!</h2>
+                    <p class="mb-8">Du hast 20 Aufgaben ohne Fehler gelöst. Du bist ein Mathe-Meister.</p>
+                    <div class="p-4 bg-green-100 text-green-700 font-bold rounded-xl mb-6">GAMING-FREIGABE AKTIVIERT</div>
+                    <a href="index.html" class="block bg-slate-900 text-white p-4 rounded-xl font-bold">Zurück</a>
+                </div>`;
+                return;
+            }
+
+            main.innerHTML = `
+                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 mb-6 min-h-[160px] flex flex-col justify-center">
+                    <div class="text-slate-400 text-xs font-bold uppercase mb-2">Aufgabe ${currentStep + 1}</div>
+                    <div class="text-2xl font-bold">${task.q}</div>
+                    <div class="mt-4 flex items-center gap-2">
+                        <div class="text-slate-500 text-lg">Ergebnis:</div>
+                        <div class="text-3xl font-black text-red-500 border-b-4 border-red-500 min-w-[80px] text-center">${currentAnswer || '?'}</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 mb-8">
+                    ${[1,2,3,4,5,6,7,8,9].map(n => `<button onclick="add('${n}')" class="keypad-btn text-slate-900">${n}</button>`).join('')}
+                    <button onclick="clearAll()" class="keypad-btn text-red-600 bg-red-50">C</button>
+                    <button onclick="add('0')" class="keypad-btn text-slate-900">0</button>
+                    <button onclick="submit()" class="keypad-btn bg-red-600 text-white border-red-800">OK</button>
+                </div>
+            `;
+        }
+
+        window.add = (n) => { if(currentAnswer.length < 8) currentAnswer += n; render(); };
+        window.clearAll = () => { currentAnswer = ""; render(); };
+        window.submit = () => {
+            if (currentAnswer === task.a) {
+                currentStep++;
+                currentAnswer = "";
+                task = generateTask();
+                render();
+            } else {
+                // Fehler -> Reset auf 0!
+                alert("Falsch! Du musst leider wieder bei Aufgabe 1 anfangen. Konzentrier dich!");
+                currentStep = 0;
+                currentAnswer = "";
+                seed = Date.now();
+                task = generateTask();
+                render();
+            }
+        };
+
+        render();
+    </script>
+</body>
+</html>
